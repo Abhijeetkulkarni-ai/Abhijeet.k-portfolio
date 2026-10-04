@@ -1,0 +1,56 @@
+---
+title: "What Actually Happens When You Open a Website?"
+description: "Understand what happens behind the scenes when you enter a URL, from DNS lookup to the browser rendering a webpage."
+date: "2026-10-04"
+category: "Web Development"
+tags:
+  - "* \"Web Development"
+  - "* \"Networking"
+  - "* \"Beginner"
+  - "featured: true"
+  - "author: \"Abhijeet Kulkarni"
+---
+
+# What Actually Happens When You Open a Website?
+
+You type a URL into your browser, press Enter, and a website appears in seconds. But what happens between those two moments?
+
+A lot more than you might think.
+
+## 1. The browser reads the URL
+
+When you enter a URL, the browser identifies the domain name, protocol, and requested resource.
+
+For example:
+
+`https://example.com/about`
+
+The browser knows it needs to request the `/about` page from `example.com` over HTTPS.
+
+## 2. DNS finds the server
+
+The browser needs an IP address for the domain. The Domain Name System (DNS) helps resolve the domain name to an IP address.
+
+Think of DNS as the internet's address book.
+
+## 3. The browser connects to the server
+
+The browser establishes a connection to the server. For HTTPS, this involves a secure TLS handshake.
+
+## 4. An HTTP request is sent
+
+The browser sends an HTTP request asking for the page. The server or application processes that request and returns an HTTP response.
+
+## 5. The browser renders the page
+
+The browser processes the returned HTML, CSS, and JavaScript to build and display the page.
+
+Depending on the website, it may also request images, fonts, and data from APIs.
+
+## The complete flow
+
+Browser → DNS → Server connection → HTTP request → Server response → Rendering
+
+That's the basic journey behind opening a website.
+
+Understanding this flow is a great first step toward understanding how frontend, backend, and databases work together.
