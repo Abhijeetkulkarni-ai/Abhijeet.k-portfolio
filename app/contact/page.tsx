@@ -103,10 +103,10 @@ Get in touch </p>
         </p>
 
         <a
-          href="mailto:abhijeet@creonox.com"
+          href="mailto:abhijeetkulkarni.ai@gmail.com"
           className="mt-3 inline-flex items-center gap-2 text-sm text-gray-700 transition-colors hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
         >
-          abhijeet@creonox.com
+          abhijeetkulkarni.ai@gmail.com
           <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -276,7 +276,7 @@ Get in touch </p>
               className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm leading-6 text-gray-700"
             >
               Your message couldn&apos;t be sent. Please try again
-              or contact me directly at abhijeet@creonox.com.
+              or contact me directly at abhijeetkulkarni.ai@gmail.com.
             </p>
           )}
 

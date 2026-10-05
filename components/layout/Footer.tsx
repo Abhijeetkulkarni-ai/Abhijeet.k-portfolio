@@ -21,11 +21,11 @@ gsap.registerPlugin(ScrollTrigger);
 ------------------------------------------------------------ */
 
 const SOCIALS = [
-    { label: "Instagram", href: "https://www.instagram.com/abhijeetk.builds/", Icon: FaInstagram },
-    { label: "LinkedIn", href: "https://www.linkedin.com/", Icon: FaLinkedinIn },
-    { label: "GitHub", href: "https://github.com/", Icon: FaGithub },
-    { label: "YouTube", href: "https://www.youtube.com/", Icon: FaYoutube },
-    { label: "X", href: "https://x.com/", Icon: FaXTwitter },
+    { label: "Instagram", href: "https://www.instagram.com/abhijeetkulkarni.ai/", Icon: FaInstagram },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/abhijeet-kulkarni-2a0892321/", Icon: FaLinkedinIn },
+    { label: "GitHub", href: "https://github.com/Abhijeetkulkarni-ai", Icon: FaGithub },
+    { label: "YouTube", href: "https://www.youtube.com/@abhijeetk.builds", Icon: FaYoutube },
+    { label: "X", href: "https://x.com/abhijeetbuilds", Icon: FaXTwitter },
 ];
 
 /* -----------------------------------------------------------

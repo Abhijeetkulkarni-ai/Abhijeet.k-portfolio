@@ -274,7 +274,7 @@ export default function BlogListingClient({
                     </p>
 
                     <Link
-                        href="https://www.linkedin.com/"
+                        href="https://www.linkedin.com/in/abhijeet-kulkarni-2a0892321/"
                         target="_blank"
                         rel="noreferrer"
                         className="w-fit border-b border-black pb-2 text-sm transition-opacity duration-300 hover:opacity-50"
