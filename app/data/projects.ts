@@ -34,7 +34,7 @@ export const projects: Project[] = [
     description:
       "A connected restaurant operations platform covering POS, tables, orders, kitchen workflows, KOT and real-time operations.",
 
-    image: "/images/projects/bombaydesk.jpg",
+    image: "/images/projects/bombaydesk.png",
 
     technologies: [
       "Next.js",
@@ -48,10 +48,11 @@ export const projects: Project[] = [
     nda: true,
 
     gallery: [
-      "/images/projects/bombaydesk/pos.jpg",
-      "/images/projects/bombaydesk/orders.jpg",
-      "/images/projects/bombaydesk/tables.jpg",
-      "/images/projects/bombaydesk/kitchen.jpg",
+      "/images/projects/bombaydesk/dashboard.png",
+      "/images/projects/bombaydesk/pos.png",
+      "/images/projects/bombaydesk/orders.png",
+      "/images/projects/bombaydesk/tables.png",
+      "/images/projects/bombaydesk/kitchen.png",
     ],
 
     overview:
@@ -97,7 +98,7 @@ export const projects: Project[] = [
     description:
       "A centralized education management platform connecting admissions, student operations, fees, staff, accounts, reports and institutional workflows.",
 
-    image: "/images/projects/education-erp.jpg",
+    image: "/images/projects/education-erp.png",
 
     technologies: [
       "Next.js",
