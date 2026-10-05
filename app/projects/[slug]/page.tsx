@@ -43,6 +43,33 @@ const bodyText = "max-w-2xl text-base leading-8 text-neutral-600 sm:text-lg";
 const focusRing =
   "rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-900";
 
+// Image box with a shimmer skeleton behind it. The image is transparent
+// until it loads, so the shimmer shows through and disappears on its own.
+const imageBox = "image-skeleton relative overflow-hidden";
+
+// Shimmer keyframes, rendered once with the page (no client JS needed)
+const skeletonCss = `
+  .image-skeleton {
+    background-color: #f0f0f0;
+    background-image: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.75) 50%,
+      transparent 80%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: image-shimmer 1.4s ease-in-out infinite;
+  }
+  @keyframes image-shimmer {
+    from { background-position: 150% 0; }
+    to   { background-position: -50% 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .image-skeleton { animation: none; }
+  }
+`;
+
 export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
@@ -83,6 +110,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main className="min-h-screen bg-white text-neutral-900 antialiased">
+      <style>{skeletonCss}</style>
+
       {/* =====================================================
           HERO
       ====================================================== */}
@@ -138,31 +167,52 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           {/* NDA badge */}
-          {project.nda && (
-            <div className="mt-10 inline-flex items-center gap-3 border border-neutral-300 px-4 py-2.5">
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-neutral-500"
-              />
+          {/* NDA / Demo access */}
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            {project.nda ? (
+              <div className="inline-flex items-center gap-3 border border-neutral-300 px-4 py-2.5">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-neutral-500"
+                />
 
-              <span className={label}>NDA Protected</span>
-            </div>
-          )}
+                <span className={label}>NDA Protected</span>
+              </div>
+            ) : project.url ? (
+              <Link
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 bg-neutral-950 px-5 py-3 text-xs font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-neutral-800"
+              >
+                Visit Demo
+                <span
+                  aria-hidden="true"
+                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                >
+                  ↗
+                </span>
+              </Link>
+            ) : null}
+          </div>
         </div>
       </section>
 
       {/* =====================================================
           MAIN IMAGE
+          Above the fold, so it loads eagerly with high priority.
+          Shimmer skeleton shows until the image is ready.
       ====================================================== */}
 
       <section className="px-4 sm:px-6 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
+          <div className={`${imageBox} aspect-[16/9]`}>
             <Image
               src={project.image}
               alt={`${project.title} project`}
               fill
-              priority
+              loading="eager"
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 1200px"
               className="object-cover"
             />
@@ -250,26 +300,24 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </div>
             </div>
 
-            {/* Gallery */}
+            {/* Gallery: lazy-loaded, each tile has its own skeleton */}
             <div className="grid gap-6 md:grid-cols-2 md:gap-8">
               {project.gallery.map((image, index) => (
                 <div
                   key={image}
-                  className={`relative overflow-hidden bg-neutral-100 ${
-                    index === 0 ? "md:col-span-2" : ""
-                  }`}
+                  className={`${imageBox} aspect-[16/10] ${index === 0 ? "md:col-span-2" : ""
+                    }`}
                 >
                   <Image
                     src={image}
                     alt={`${project.title} UI screen ${index + 1}`}
-                    width={1600}
-                    height={1000}
+                    fill
                     sizes={
                       index === 0
                         ? "(max-width: 768px) 100vw, 1200px"
                         : "(max-width: 768px) 100vw, 600px"
                     }
-                    className="h-auto w-full object-cover"
+                    className="object-cover"
                   />
                 </div>
               ))}

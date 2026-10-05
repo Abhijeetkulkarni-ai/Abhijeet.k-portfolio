@@ -15,8 +15,9 @@ export type Project = {
   challenges: string[];
   outcome: string;
 
-  // NDA / UI-UX
+  // Project
   nda?: boolean;
+  url?: string;
   gallery?: string[];
 };
 
@@ -46,8 +47,6 @@ export const projects: Project[] = [
     // Client project — covered by NDA.
     nda: true,
 
-    // Add only UI/UX screens that you are permitted
-    // to showcase publicly.
     gallery: [
       "/images/projects/bombaydesk/pos.jpg",
       "/images/projects/bombaydesk/orders.jpg",
@@ -110,16 +109,13 @@ export const projects: Project[] = [
 
     year: "2026",
 
-    // Client project — covered by NDA.
-    nda: true,
+    url: "https://edu-erp-ecru.vercel.app/",
 
-    // Add only UI/UX screens that you are permitted
-    // to showcase publicly.
     gallery: [
-      "/images/projects/education-erp/dashboard.jpg",
-      "/images/projects/education-erp/admission.jpg",
-      "/images/projects/education-erp/staff.jpg",
-      "/images/projects/education-erp/fees.jpg",
+      "/images/projects/education-erp/dashboard.png",
+      "/images/projects/education-erp/admission.png",
+      "/images/projects/education-erp/staff.png",
+      "/images/projects/education-erp/fees.png",
     ],
 
     overview:
