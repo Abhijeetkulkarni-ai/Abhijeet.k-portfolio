@@ -181,7 +181,7 @@ export default function Footer() {
 
                     <div className="flex flex-col items-start gap-5 sm:items-end">
                         <a
-                            href="mailto:YOUR_EMAIL@example.com"
+                            href="mailto:abhijeetkulkarni.ai@gmail.com"
                             className="group inline-flex shrink-0 items-center gap-2 border-b border-white/30 pb-2 text-sm transition-colors hover:border-white"
                         >
                             Let&apos;s talk
