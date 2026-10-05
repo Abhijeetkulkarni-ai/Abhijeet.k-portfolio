@@ -3,7 +3,8 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { testimonials } from "./testimonials-data";
+import countryCodeEmoji from "country-code-emoji";
+import { stackTestimonials as testimonials } from "./testimonials-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,14 +15,27 @@ export default function TestimonialsStack() {
     const section = sectionRef.current;
     if (!section) return;
 
+
     const ctx = gsap.context(() => {
-      const heading = section.querySelector<HTMLElement>(".testimonials-heading");
-      const cards = gsap.utils.toArray<HTMLElement>(".testimonial-stack-card");
+      const heading = section.querySelector<HTMLElement>(
+        ".testimonials-heading",
+      );
+
+      const cards = gsap.utils.toArray<HTMLElement>(
+        ".testimonial-stack-card",
+      );
+
       if (!heading || cards.length === 0) return;
 
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
       if (reducedMotion) {
-        gsap.set([heading, ...cards], { clearProps: "all", autoAlpha: 1 });
+        gsap.set([heading, ...cards], {
+          clearProps: "all",
+          autoAlpha: 1,
+        });
         return;
       }
 
@@ -38,7 +52,8 @@ export default function TestimonialsStack() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${window.innerHeight * (cards.length + 0.5)}`,
+          end: () =>
+            `+=${window.innerHeight * (cards.length + 0.5)}`,
           pin: true,
           scrub: 0.7,
           anticipatePin: 1,
@@ -55,12 +70,18 @@ export default function TestimonialsStack() {
       timeline.fromTo(
         heading,
         { y: 18, autoAlpha: 0.35 },
-        { y: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.4,
+          ease: "power2.out",
+        },
         0,
       );
 
       cards.forEach((card, index) => {
         const position = 0.3 + index * 1.1;
+
         timeline.addLabel(`card-${index}`, position);
 
         // Keep earlier cards visible behind the active card.
@@ -93,46 +114,72 @@ export default function TestimonialsStack() {
     }, section);
 
     return () => ctx.revert();
+
+
   }, []);
 
-  return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="testimonials-title"
-      className="relative isolate w-full overflow-hidden bg-white text-black"
-    >
-      <div className="relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden px-5 py-12 md:px-10">
-        <div className="testimonials-heading pointer-events-none absolute inset-0 z-0 flex flex-col items-center justify-center text-center uppercase leading-[0.78] tracking-[-0.075em]">
-          <h2 id="testimonials-title" className="text-[clamp(3.5rem,13.5vw,12.5rem)] font-semibold">Ideas</h2>
-          <span className="mt-2 text-[clamp(3.5rem,13.5vw,12.5rem)] font-semibold">Into</span>
-          <span className="mt-2 text-[clamp(3.5rem,13.5vw,12.5rem)] font-semibold">Impact</span>
-        </div>
+  return (<section
+    ref={sectionRef}
+    aria-labelledby="testimonials-title"
+    className="relative isolate w-full overflow-hidden bg-white text-black"
+  > <div className="relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden px-5 py-12 md:px-10"> <div className="testimonials-heading pointer-events-none absolute inset-0 z-0 flex flex-col items-center justify-center text-center uppercase leading-[0.78] tracking-[-0.075em]"> <h2
+    id="testimonials-title"
+    className="text-[clamp(3.5rem,13.5vw,12.5rem)] font-semibold"
+  >
+    Ideas </h2> <span className="mt-2 text-[clamp(3.5rem,13.5vw,12.5rem)] font-semibold">
+      Into </span> <span className="mt-2 text-[clamp(3.5rem,13.5vw,12.5rem)] font-semibold">
+      Impact </span> </div>
 
-        <div className="relative z-10 mt-[8vh] flex h-[min(390px,52svh)] w-full max-w-[590px] items-center justify-center md:mt-[10vh] md:h-[400px]">
-          {testimonials.map((item, index) => (
-            <article
-              key={`${item.name}-${index}`}
-              className="testimonial-stack-card absolute inset-0 flex min-h-[290px] flex-col border border-neutral-200 bg-white p-5 shadow-[0_16px_50px_rgba(0,0,0,0.08)] sm:p-7 md:min-h-[330px] md:p-9"
-              style={{ zIndex: index + 1, opacity: 1, visibility: "visible" }}
-            >
-              <div className="mb-6 flex items-center justify-between">
-                <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">
-                  {String(index + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+      <div className="relative z-10 mt-[8vh] grid w-full max-w-[590px] md:mt-[10vh]">
+        {testimonials.map((item, index) => (
+          <article
+            key={`${item.name}-${index}`}
+            className="testimonial-stack-card col-start-1 row-start-1 flex flex-col border border-neutral-200 bg-white p-6 shadow-[0_16px_50px_rgba(0,0,0,0.08)] sm:p-7 md:p-9"
+            style={{
+              zIndex: index + 1,
+              opacity: 1,
+              visibility: "visible",
+            }}
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">
+                {String(index + 1).padStart(2, "0")} /{" "}
+                {String(testimonials.length).padStart(2, "0")}
+              </span>
+
+              <span
+                aria-hidden="true"
+                className="text-4xl leading-none text-neutral-400"
+              >
+                “
+              </span>
+            </div>
+
+            <blockquote className="max-w-[31ch] text-xl font-normal leading-snug tracking-[-0.035em] sm:text-2xl md:text-[1.75rem]">
+              “{item.quote}”
+            </blockquote>
+
+            <div className="mt-auto pt-6">
+              <div className="mb-4 h-px w-full bg-neutral-200" />
+
+              <p className="text-sm font-semibold tracking-tight">{item.name}</p>
+
+              <p className="mt-1 text-xs text-neutral-600">{item.business}</p>
+
+              <p className="mt-1 flex items-center gap-1.5 text-xs text-neutral-500">
+                <span>{item.role}</span>
+                <span aria-hidden="true">·</span>
+                <span aria-label={`${item.country} flag`} title={item.country}>
+                  {countryCodeEmoji(item.country)}
                 </span>
-                <span aria-hidden="true" className="text-4xl leading-none text-neutral-400">“</span>
-              </div>
-              <blockquote className="max-w-[31ch] text-xl font-normal leading-snug tracking-[-0.035em] sm:text-2xl md:text-[1.75rem]">
-                “{item.quote}”
-              </blockquote>
-              <div className="mt-auto pt-7">
-                <div className="mb-4 h-px w-full bg-neutral-200" />
-                <p className="text-sm font-semibold tracking-tight">{item.name}</p>
-                <p className="mt-1 text-xs text-neutral-500">{item.role}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+              </p>
+            </div>
+          </article>
+        ))}
       </div>
-    </section>
+    </div>
+  </section>
+
+
   );
 }

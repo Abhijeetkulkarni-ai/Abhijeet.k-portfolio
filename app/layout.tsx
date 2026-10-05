@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const helvetica = localFont({
   src: [
@@ -46,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${helvetica.variable} h-full antialiased text-black selection:bg-violet-700 selection:text-white`}>
-      <body className="flex min-h-full flex-col" > <Navbar />   <CustomCursor /> {children}<Footer /></body>
+      <body className="flex min-h-full flex-col" > <SmoothScroll /> <Navbar />   <CustomCursor /> {children}<Footer /></body>
     </html>
   );
 }
