@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/next"
 import Navbar from "../components/layout/navbar";
 import Footer from "../components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
@@ -52,6 +52,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <SmoothScroll />
+        <Analytics/>
         <Navbar />
         <CustomCursor />
         {children}
