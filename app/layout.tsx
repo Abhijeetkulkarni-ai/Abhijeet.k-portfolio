@@ -52,11 +52,11 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <SmoothScroll />
-        <Analytics/>
         <Navbar />
         <CustomCursor />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
